@@ -1,4 +1,4 @@
-# Javascript Celerative/Codility challengee
+# Javascript Celerative/Codility challenge
 
 - [x] Validate by 'person' or 'company', return true if validated
 - [x] Validation by 'person' checks if name and lastName are non-empty
