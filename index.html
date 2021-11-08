@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    form {
+      width: 30%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    input[type="text"] {
+      /* width: 100%; */
+      padding: 10px;
+      margin: 10px;
+    }
+    button {
+      width: 30%;
+      padding: 10px;
+      margin: 10px;
+      border-radius: 9px;
+      background-color: coral;
+    }
+    input[type="radio"] {
+      vertical-align: baseline;
+    }
+  </style>
+
+  <body>
+    <form>
+      <label for="type_person">
+        <input
+          class="radio"
+          type="radio"
+          id="type_person"
+          name="type"
+          value="person"
+          checked
+        />
+        Validate by Person
+      </label>
+      <label for="type_company">
+        <input
+          class="radio"
+          type="radio"
+          id="type_company"
+          name="type"
+          value="company"
+        />
+        Validate by Company </label
+      ><input type="text" id="first_name" name="first_name" value="John" placeholder="First Name"/>
+      <input type="text" id="last_name" name="last_name" value="Doe" placeholder="Last Name"/>
+      <input type="text" id="email" name="email" value="john@example.com" placeholder="E-mail"/>
+      <input type="text" id="company_name" name="company_name" value="" placeholder="Company Name"/>
+      <input type="text" id="phone" name="phone" value="234-567-890" placeholder="Phone"/>
+    </form>
+
+    <button onclick="solution()">Try it</button>
+
+    <p id="demo"></p>
+
+    <script>
+      function solution() {
+        // write your code in JavaScript (Node.js 8.9.4)
+        //
+        // you can access DOM Tree using DOM Object Model:
+        //    document.getElementById
+        // or using jQuery:
+        //    $('some_tag')
+        //
+        // you can write to stdout for debugging purposes, e.g.
+        // console.log('this is a debug message');
+        if (document.getElementById("type_person").checked) {
+          let name_validated = false;
+          let email_validated = false;
+
+          let firstName = document.getElementById("first_name").value;
+          let lastName = document.getElementById("last_name").value;
+          let email = document.getElementById("email").value;
+
+          if (firstName == "" || lastName == "") {
+            name_validated = false;
+          } else {
+            name_validated = true;
+          }
+          const re = /^[A-Za-z0-9.]+@[A-Za-z0-9.]+$/;
+          if (re.test(String(email).toLowerCase())) {
+            email_validated = true;
+          } else {
+            email_validated = false;
+          }
+          if (name_validated && email_validated) {
+            document.getElementById("demo").innerHTML = "name checked";
+          } else {
+            document.getElementById("demo").innerHTML = "";
+          }
+          return name_validated && email_validated;
+        }
+
+        if (document.getElementById("type_company").checked) {
+          let company_validated = false;
+          let phone_validated = false;
+
+          let companyName = document.getElementById("company_name").value;
+          let phone = document.getElementById("phone").value;
+
+          if (companyName == "") {
+            company_validated = false;
+          } else {
+            company_validated = true;
+          }
+
+          var isPhoneValid = phone.replace(/[ -]/g, "").match(/^\d{6,}$/);
+          if (Boolean(isPhoneValid)) {
+            phone_validated = true;
+          } else {
+            phone_validated = false;
+          }
+
+          if (company_validated && phone_validated) {
+            document.getElementById("demo").innerHTML = "company checked";
+          } else {
+            document.getElementById("demo").innerHTML = "";
+          }
+
+          return company_validated && phone_validated;
+        }
+      }
+    </script>
+  </body>
+</html>
